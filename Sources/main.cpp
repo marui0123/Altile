@@ -85,21 +85,19 @@ exit:
 
     int     main(void)
     {
-        PluginMenu *menu = new PluginMenu("Action Replay", 0, 7, 1,
-                                            "A blank template plugin.\nGives you access to the ActionReplay and others tools.");
+        static constexpr auto
+            plgmenu_title   = "Action Replay",
+            plgmenu_about   = "A blank template plugin.\nGives you access to the ActionReplay and others tools.";
+
+        PluginMenu menu{ plgmenu_title, plgmenu_about };
 
         // Synnchronize the menu with frame event
-        menu->SynchronizeWithFrame(true);
+        menu.SynchronizeWithFrame(true);
 
         // Init our menu entries & folders
-        InitMenu(*menu);
+        InitMenu(menu);
 
         // Launch menu and mainloop
-        menu->Run();
-
-        delete menu;
-
-        // Exit plugin
-        return (0);
+        return menu.Run();
     }
 }
